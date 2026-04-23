@@ -1,91 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Sunny - Developer portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    <title>Sunny's portfolio</title>
     <style>
-        * {
+        *{
             margin: 0;
             padding: 0;
-        }
+            box-sizing: border-box;
 
-        body {
-            background-color: rgb(31, 1, 29);
+        }
+        html{
+            scroll-snap-type: y mandatory;
+
+        }
+        body{
+            font-family: Arial, sans-serif;
+            background:rgb(0, 0, 0);
             color: white;
+            scroll-behavior: smooth;
 
         }
-        nav{
+        /*pariccles*/
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /*sections*/
+        section {
+            height: 100vh;
+            scroll-snap-align: start;
             display: flex;
-            justify-content: space-around;
-            align-items:center;
-            height: 80px;
-            background-color: rgb(105, 96, 102) ;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
 
         }
-        nav ul {
-            display: flex;
-            justify-content:center;
-        }
-        nav ul li{ 
-            list-style: none;
-            margin: 0 20px;
-        }
-        .left{
-            font-size: 1.5rem;
-        }
-        .firstsection{
-            display: flex;
-            justify-content: space-around;
-            margin: 23px 0;
-        }
-        .firstsection div {
-            width: 30%;
-        }
+        /*hero*/
+        .hero h1 {
+            font-size: 90px;
+            text-shadow: 0 0 20px;
 
-        .leftsection{
-        background-color:  rgb(219, 10, 28);
-        height: 20px;
         }
-        
-        .rightsection{
-        background-color:  rgb(219, 10, 28);
+        .hero h2{
+            color:rgb(20, 169, 169);
+
+        }
+        /*glass dark*/
+        .about, .projects {
+            background: rgba(225, 225, 225, 0.05);
+            backdrop-filter: blur(8px);
+
+        }
+        /* button*/
+        .btn {
+            margin-top:20px;
+            padding: 10px 20px;
+            background: #ff4d5a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+
+        }
+        /*fade*/
+        .fade {
+            opacity: 0;
+            transform: translate(40px);
+            transition: 1s;
+
+        }
+        .fade.show {
+            opacity: 1;
+            transform: translate(0);
+
         }
 
     </style>
-</head>
-
-<body>
-    <header>
-        <nav>
-            <div class="left">sunny's portfolio</div>
-            <div class="right">
-                <ul>
-                    <li>Home</li>
-                    <li> About</li>
-                    <li> Services</li>
-                    <li>Projects</li>
-                    <li>Contact Me</li>
-
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <section class="firstsection">
-            <div class="leftsection">
-                left
-            </div>
-            <div class="rightsection">
-                right
-            </div>
+    </head>
+    <body>
+        <div id="particles-js"></div>
+        <!hero>
+        <section class="hero">
+            <p> I AM </p>
+            <h1 id="typing"></h1>
+            <h2>FULL STACK DEVELOPER</h2>
+            <a href="#about" class="btn">scroll</a>
 
         </section>
-    </main>
+        <!about>
+        <section id="about" class="about fade">
+            <h2> About Me</h2>
+            <p> learning java javascript html css dsa & webdev </p>
+            <a href="#projects" class="btn">next</a>
+        </section>
+        <!projects>
+        <section id="projects" class="projects fade">
+            <h2> Projects</h2>
+            <p> My Work</p>
+        </section>
+        
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
+<script>
+    /*advance particle (match that site style) */
+   particlesJS("particles-js", {
+  particles: {
+    number: { value: 100 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3 },
+    line_linked: {
+      enable: true,
+      distance: 120,
+      color: "#ffffff",
+      opacity: 0.2,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 2,
+      out_mode: "out"
+    }
+  },
+
+  interactivity: {
+    events: {
+      onhover: {
+        enable: true,
+        mode: "grab"
+      },
+      onclick: {
+        enable: true,
+        mode: "repulse"
+      }
+    },
+    modes: {
+      grab: {
+        distance: 140,
+        line_linked: { opacity: 0.5 }
+      },
+      repulse: {
+        distance: 100
+      }
+    }
+  },
+
+  retina_detect: true
+});
+/*typing*/
+const text ="SUNNY";
+let i = 0;
+function type() {
+    if (i< text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 120);
+
+    }
+}
+type();
+/*fade*/
+const faders = document.querySelectorAll(".fade");
+window.addEventListener("scroll", () => {
+    faders.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+            el.classList.add("show");
+        }
+    });
+});
+</script>
+    </body>
+    </style>
+</head>
+<body>
+    
 </body>
-
 </html>
